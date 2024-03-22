@@ -1,11 +1,21 @@
 // DEPENDENCIES
 const express = require('express')
+const { Sequelize } = require('sequelize')
 const app = express()
+
+
 
 // CONFIGURATION / MIDDLEWARE
 require('dotenv').config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+
+//CONTROLLERS
+const bandsController = require('./controllers/bands_controller');
+const eventsController = require('./controllers/event_controller'); // Require the events controller
+const stagesController = require('./controllers/stage_controller');
+
 
 // ROOT
 app.get('/', (req, res) => {
@@ -14,7 +24,21 @@ app.get('/', (req, res) => {
     })
 })
 
+// SEQUELIZE CONNECTION 
+// DATABASE
+const { sequelize } = require('./models') 
+//const sequelize = new Sequelize(process.env.DB_CONNECTION)
+const testSequelize = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('Database connection has been establisshed sucessfully')
+    } catch (error) {
+        console.log('Unable to connect to database', error);     
+    }
+}
+
 // LISTEN
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, async () => {
+    await testSequelize()
     console.log(`🎸 Rockin' on port: ${process.env.PORT}`)
 })
