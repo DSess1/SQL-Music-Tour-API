@@ -12,9 +12,9 @@ app.use(express.urlencoded({ extended: false }))
 
 
 //CONTROLLERS
-const bandsController = require('./controllers/bands_controller');
-app.use('/events', require('./controllers/event_controller')); // Require the events controller
-app.use('/stages', require('./controllers/stage_controller'));
+const bandsController = require('./controllers/bands_controller')
+app.use('/events', require('./controllers/event_controller')) // Require the events controller
+app.use('/stages', require('./controllers/stage_controller'))
 
 // ROOT
 app.get('/', (req, res) => {

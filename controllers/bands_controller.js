@@ -1,6 +1,6 @@
 const express = require('express');
 const bands = express.Router();
-const { Band } = require('../models')
+const { Band, MeetGreet } = require('../models')
 
 
 bands.get('/', async (req, res) => {
@@ -16,7 +16,14 @@ bands.get('/', async (req, res) => {
 bands.get('/:id', async (req, res) => {
     try{
       const specificBand = await Band.findOne({
-        where:{id: req.params.id }
+        where:{id: req.params.id },
+        include: [
+          {
+            model: MeetGreet
+          }
+
+
+        ]
       })
       res.json(specificBand)
     } catch (e) {

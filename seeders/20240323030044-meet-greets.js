@@ -12,7 +12,12 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-  },
+    await queryInterface.bulkInsert('MeetGreet', [
+      {band_id: 1, event_id: 1, start_time: new Date('2024-08-25 18:00:00'),createdAt: new Date(),updatedAt: new Date() },
+      {band_id: 1, event_id: 2, start_time: new Date('2024-04-01 18:00:00'), createdAt: new Date(),updatedAt: new Date() },
+    
+    ], {});
+}, 
 
   async down (queryInterface, Sequelize) {
     /**
@@ -21,5 +26,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('MeetGreet', null, {});
   }
 };
